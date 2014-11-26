@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+  <head>
+    <title>mouse-position Demo</title>
+    <script src="bower_components/webcomponentsjs/webcomponents.min.js"></script>
+    <link rel="import" href="mouse-position.html">
+  </head>
+  <body unresolved>
+    <template is="auto-binding">
+      <mouse-position offsetX={{left}} offsetY={{top}}>
+        <div style="width: 100%; height: 300px; background-color: yellow"></div>
+      </mouse-position>
+      <code>{{left}}</code>
+      <code>{{top}}</code>
+    </template>
+  </body>
+</html>

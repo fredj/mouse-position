@@ -1,0 +1,55 @@
+<link rel="import" href="bower_components/polymer/polymer.html">
+
+<polymer-element name="mouse-position">
+  <template>
+    <div id="target">
+      <content></content>
+    </div>
+  </template>
+  <script>
+    Polymer({
+      publish: {
+        offsetX: {
+          value: null,
+          reflect: true
+        },
+        offsetY: {
+          value: null,
+          reflect: true
+        }
+      },
+
+      ready: function() {
+        var target = this.$.target;
+        target.addEventListener('mousemove', this.onMouseMove.bind(this));
+        target.addEventListener('mouseout', this.onMouseOut.bind(this));
+      },
+
+      detached: function() {
+        // FIXME: remove event listener
+      },
+
+      /**
+       * @param {MouseEvent} event
+       */
+      onMouseMove: function(event) {
+        if (event.offsetX === undefined || event.offsetY === undefined) {
+          var box = event.target.getBoundingClientRect();
+          this.offsetX = event.clientX - box.left;
+          this.offsetY = event.clientY - box.top;
+        } else {
+          this.offsetX = event.offsetX;
+          this.offsetY = event.offsetY;
+        }
+      },
+
+      /**
+       * @param {MouseEvent} event
+       */
+      onMouseOut: function(event) {
+        this.offsetX = null;
+        this.offsetY = null;
+      }
+    });
+  </script>
+</polymer-element>
